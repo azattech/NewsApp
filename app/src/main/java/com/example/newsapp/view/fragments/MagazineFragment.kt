@@ -1,4 +1,4 @@
-package com.example.newsapp.ui.fragments
+package com.example.newsapp.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,14 +10,14 @@ import com.example.newsapp.R
 /**
  * A simple [Fragment] subclass.
  */
-class BreakingFragment : Fragment() {
+class MagazineFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_breaking, container, false)
+        return inflater.inflate(R.layout.fragment_magazine, container, false)
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.newsapp.ui.activity
+package com.example.newsapp.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
