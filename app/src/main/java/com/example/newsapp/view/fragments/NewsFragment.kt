@@ -12,12 +12,12 @@ import com.example.newsapp.R
 import com.example.newsapp.model.News
 import com.example.newsapp.view.NewsListAdapter
 import com.example.newsapp.viewmodel.NewsViewModel
-import kotlinx.android.synthetic.main.fragment_breaking.*
+import kotlinx.android.synthetic.main.fragment_news.*
 
 /**
  * A simple [Fragment] subclass.
  */
-class BreakingFragment : Fragment() {
+class NewsFragment : Fragment() {
 
     private lateinit var viewModel: NewsViewModel
     private val newsListAdapter = NewsListAdapter(arrayListOf())
@@ -46,7 +46,7 @@ class BreakingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_breaking, container, false)
+        return inflater.inflate(R.layout.fragment_news, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
