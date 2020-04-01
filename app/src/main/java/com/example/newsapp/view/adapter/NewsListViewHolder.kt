@@ -1,4 +1,4 @@
-package com.example.newsapp.view
+package com.example.newsapp.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -32,7 +32,7 @@ class NewsListViewHolder(parent: ViewGroup) :
     val newsDate: TextView = itemView.findViewById(R.id.textDate)
 
     fun bind(article: Articles) {
-        //newsImage.setImageResource(news.urlToImage)
+        newsImage.setImageResource(article.urlToImage!!.toInt())
         newsTitle.text = article.title
         newsDescription.text = article.description
         newsSource.text = article.source?.name

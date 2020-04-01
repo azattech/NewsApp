@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapp.R
-import com.example.newsapp.model.News
-import com.example.newsapp.view.NewsListAdapter
+import com.example.newsapp.model.Articles
+import com.example.newsapp.view.adapter.NewsListAdapter
 import com.example.newsapp.viewmodel.NewsViewModel
 import kotlinx.android.synthetic.main.fragment_news.*
 
@@ -20,9 +20,10 @@ import kotlinx.android.synthetic.main.fragment_news.*
 class NewsFragment : Fragment() {
 
     private lateinit var viewModel: NewsViewModel
-    private val newsListAdapter = NewsListAdapter(arrayListOf())
+    private val newsListAdapter =
+        NewsListAdapter(arrayListOf())
 
-    private val newsListDataObserver = Observer<List<News>> { list ->
+    private val newsListDataObserver = Observer<List<Articles>> { list ->
         list?.let {
             recyclerNewsList.visibility = View.VISIBLE
             newsListAdapter.updateNews(it)
@@ -59,8 +60,16 @@ class NewsFragment : Fragment() {
         viewModel.refresh()
 
         recyclerNewsList.apply {
-            layoutManager = GridLayoutManager(context, 2)
+            layoutManager = LinearLayoutManager(context)
             adapter = newsListAdapter
+        }
+
+        refreshLayout.setOnRefreshListener {
+            recyclerNewsList.visibility = View.GONE
+            textNewsError.visibility = View.GONE
+            progressLoadingView.visibility = View.VISIBLE
+            viewModel.refresh()
+            refreshLayout.isRefreshing = false
         }
     }
 }

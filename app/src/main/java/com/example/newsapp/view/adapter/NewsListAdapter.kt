@@ -1,9 +1,8 @@
-package com.example.newsapp.view
+package com.example.newsapp.view.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapp.model.Articles
-import com.example.newsapp.model.News
 
 
 /*************************
@@ -25,9 +24,9 @@ class NewsListAdapter(private val articlesList: List<Articles>) :
         viewHolder.bind(articlesList[position])
     }
 
-    fun updateNews(newsList: List<News>) {
-        //newsList.clear()
-        //newsList.addAll(newAnimalList)
+    fun updateNews(newArticlesList: List<Articles>) {
+        // articlesList.clear()
+        // articlesList.addAll(newArticlesList)
         notifyDataSetChanged()
     }
 }
