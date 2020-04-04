@@ -54,7 +54,7 @@ class NewsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProviders.of(this).get(NewsViewModel::class.java)
-        viewModel.news.observe(this, newsListDataObserver)
+        viewModel.newsLiveData.observe(this, newsListDataObserver)
         viewModel.loading.observe(this, loadingLiveDataObserver)
         viewModel.loadError.observe(this, errorLiveDataObserver)
         viewModel.refresh()

@@ -12,7 +12,7 @@ import com.example.newsapp.model.Articles
  *                       *
  * 04/03/2020 - 9:14 PM  *
  ************************/
-class NewsListAdapter(private val articlesList: List<Articles>) :
+class NewsListAdapter(private val articlesList: ArrayList<Articles>) :
     RecyclerView.Adapter<NewsListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsListViewHolder =
@@ -25,8 +25,8 @@ class NewsListAdapter(private val articlesList: List<Articles>) :
     }
 
     fun updateNews(newArticlesList: List<Articles>) {
-        // articlesList.clear()
-        // articlesList.addAll(newArticlesList)
+        articlesList.clear()
+        articlesList.addAll(newArticlesList)
         notifyDataSetChanged()
     }
 }

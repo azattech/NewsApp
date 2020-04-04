@@ -3,7 +3,13 @@ package com.example.newsapp.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.newsapp.model.Articles
-import com.example.newsapp.model.Source
+import com.example.newsapp.model.NewsApiService
+import com.example.newsapp.model.NewsRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 
 /*************************
@@ -15,30 +21,31 @@ import com.example.newsapp.model.Source
  ************************/
 class NewsViewModel : ViewModel() {
 
-    val news by lazy { MutableLiveData<List<Articles>>() }
+    val newsLiveData by lazy { MutableLiveData<List<Articles>>() }
     val loadError by lazy { MutableLiveData<Boolean>() }
     val loading by lazy { MutableLiveData<Boolean>() }
 
+    private val parentJob = Job()
+    private val coroutineContext: CoroutineContext get() = parentJob + Dispatchers.Default
+    private val coroutineScope = CoroutineScope(coroutineContext)
+
+    private val newsRepository: NewsRepository = NewsRepository(NewsApiService.create())
 
     fun refresh() {
         getNews()
     }
 
     private fun getNews() {
-        val source = Source("", "")
-
-        val a1 = Articles(source, "", "", "", "", "", "", "")
-        val a2 = Articles(source, "", "", "", "", "", "", "")
-        val a3 = Articles(source, "", "", "", "", "", "", "")
-        val a4 = Articles(source, "", "", "", "", "", "", "")
-        val a5 = Articles(source, "", "", "", "", "", "", "")
-        val a6 = Articles(source, "", "", "", "", "", "", "")
-        val a7 = Articles(source, "", "", "", "", "", "", "")
-
-        var newsList: ArrayList<Articles> = arrayListOf(a1, a2, a3, a4, a5, a6, a7)
-
-        news.value = newsList
+        coroutineScope.launch {
+            val latestNews = newsRepository.getLatestNews()
+            newsLiveData.postValue(latestNews)
+        }
         loadError.value = false
         loading.value = false
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        parentJob.cancel()
     }
 }
