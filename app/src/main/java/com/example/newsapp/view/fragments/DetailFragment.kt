@@ -5,21 +5,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.newsapp.R
+import com.example.newsapp.databinding.FragmentDetailBinding
 import com.example.newsapp.model.Articles
 import kotlinx.android.synthetic.main.fragment_detail.*
 
 class DetailFragment : Fragment() {
 
     var articles: Articles? = null
+    private lateinit var dataBinding: FragmentDetailBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail, container, false)
+        dataBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
+        return dataBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -30,20 +34,17 @@ class DetailFragment : Fragment() {
             progressWebView.visibility = View.VISIBLE
         }
 
-        /*   context?.let{
-               img.loadImage(articles?.urlToImage, getProgressDrawable(it))
-           }
-           title_on_appbar.text = articles?.source.toString()
-           subtitle_on_appbar.text = articles?.url
-           date.text = articles?.publishedAt
-           title.text = articles?.title*/
-        articles?.url?.let {
-            initWebView(it)
+        dataBinding.articles = articles
+        initWebView()
+
+        /*articles?.url?.let {
+            initWebView()
             progressWebView.visibility = View.GONE
-        }
+        }*/
     }
 
-    private fun initWebView(url: String) {
+    private fun initWebView() {
+        progressWebView.visibility = View.GONE
         webView.settings.loadsImagesAutomatically = true
         webView.settings.javaScriptEnabled = true
         webView.settings.domStorageEnabled = true
@@ -52,7 +53,7 @@ class DetailFragment : Fragment() {
         webView.settings.displayZoomControls = false
         webView.scrollBarStyle = View.SCROLLBARS_INSIDE_OVERLAY
         webView.webViewClient = object : WebViewClient() {}
-        webView.loadUrl(url)
+
     }
 
 }
