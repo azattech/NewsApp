@@ -1,5 +1,8 @@
 package com.example.newsapp.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 
 /*************************
  * Created by AZAT SAYAN *
@@ -9,12 +12,14 @@ package com.example.newsapp.model
  * 02/03/2020 - 10:47 PM *
  ************************/
 
+@Parcelize
 data class News(
     val status: String?,
     val totalResults: Int?,
     val articles: List<Articles>?
-)
+) : Parcelable
 
+@Parcelize
 data class Articles(
     val source: Source?,
     val author: String?,
@@ -24,10 +29,10 @@ data class Articles(
     val urlToImage: String?,
     val publishedAt: String?,
     val content: String?
-)
+) : Parcelable
 
-
+@Parcelize
 data class Source(
     val id: String?,
     val name: String?
-)
+) : Parcelable

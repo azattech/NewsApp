@@ -2,13 +2,16 @@ package com.example.newsapp.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapp.R
 import com.example.newsapp.extensions.getProgressDrawable
 import com.example.newsapp.extensions.loadImage
 import com.example.newsapp.model.Articles
+import com.example.newsapp.view.fragments.NewsFragmentDirections
 
 
 /*************************
@@ -27,13 +30,13 @@ class NewsListViewHolder(parent: ViewGroup) :
         )
     ) {
 
-
     val newsImage: ImageView = itemView.findViewById(R.id.imageView)
     val newsTitle: TextView = itemView.findViewById(R.id.textTitle)
     val newsDescription: TextView = itemView.findViewById(R.id.textDescription)
     val newsSource: TextView = itemView.findViewById(R.id.textSource)
     val newsDate: TextView = itemView.findViewById(R.id.textDate)
     val progressDrawable = getProgressDrawable(parent.context)
+    val newsLayout = itemView.findViewById<FrameLayout>(R.id.newsLayout)
 
 
     fun bind(article: Articles) {
@@ -42,5 +45,9 @@ class NewsListViewHolder(parent: ViewGroup) :
         newsDescription.text = article.description
         newsSource.text = article.source?.name
         newsDate.text = article.publishedAt
+        newsLayout.setOnClickListener {
+            val action = NewsFragmentDirections.actionNewsFragmentToDetailFragment(article)
+            Navigation.findNavController(itemView).navigate(action)
+        }
     }
 }
