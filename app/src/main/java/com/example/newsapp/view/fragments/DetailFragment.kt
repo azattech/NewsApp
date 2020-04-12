@@ -1,5 +1,6 @@
 package com.example.newsapp.view.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -43,6 +44,7 @@ class DetailFragment : Fragment() {
         }*/
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun initWebView() {
         progressWebView.visibility = View.GONE
         webView.settings.loadsImagesAutomatically = true

@@ -29,7 +29,8 @@ class NewsViewModel : ViewModel() {
     private val coroutineContext: CoroutineContext get() = parentJob + Dispatchers.Default
     private val coroutineScope = CoroutineScope(coroutineContext)
 
-    private val newsRepository: NewsRepository = NewsRepository(NewsApiService.create())
+    private val newsApiService = NewsApiService()
+    private val newsRepository: NewsRepository = NewsRepository(newsApiService.provideNewsApi())
 
     fun refresh() {
         getNews()
