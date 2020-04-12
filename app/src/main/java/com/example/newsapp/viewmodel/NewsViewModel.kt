@@ -2,13 +2,15 @@ package com.example.newsapp.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.newsapp.di.DaggerViewModelComponent
 import com.example.newsapp.model.Articles
-import com.example.newsapp.model.NewsApiService
-import com.example.newsapp.model.NewsRepository
+import com.example.newsapp.model.network.NewsApiService
+import com.example.newsapp.model.network.NewsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 
@@ -29,8 +31,15 @@ class NewsViewModel : ViewModel() {
     private val coroutineContext: CoroutineContext get() = parentJob + Dispatchers.Default
     private val coroutineScope = CoroutineScope(coroutineContext)
 
-    private val newsApiService = NewsApiService()
-    private val newsRepository: NewsRepository = NewsRepository(newsApiService.provideNewsApi())
+    @Inject
+    lateinit var newsApiService: NewsApiService
+
+    init {
+        DaggerViewModelComponent.create().inject(this)
+    }
+
+    private val newsRepository: NewsRepository =
+        NewsRepository(newsApiService.api)
 
     fun refresh() {
         getNews()

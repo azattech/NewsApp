@@ -1,6 +1,7 @@
-package com.example.newsapp.model
+package com.example.newsapp.model.network
 
 
+import com.example.newsapp.model.News
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Query

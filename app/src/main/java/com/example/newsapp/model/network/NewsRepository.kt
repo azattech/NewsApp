@@ -1,4 +1,6 @@
-package com.example.newsapp.model
+package com.example.newsapp.model.network
+
+import com.example.newsapp.model.Articles
 
 
 /*************************
@@ -8,11 +10,11 @@ package com.example.newsapp.model
  *                       *
  * 01/04/2020 - 10:17 PM *
  ************************/
-class NewsRepository(private val newsApiService: NewsApi) {
+class NewsRepository(private val newsApi: NewsApi) {
 
     suspend fun getLatestNews(): MutableList<Articles>? {
         return try {
-            val response = newsApiService.getNewsAsync("us", "8fc34d247dee40b5ba90295e691cf8b7")
+            val response = newsApi.getNewsAsync("us", "8fc34d247dee40b5ba90295e691cf8b7")
                 .await()
             response.articles?.toMutableList()
         } catch (e: Exception) {
