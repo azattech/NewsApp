@@ -37,6 +37,13 @@ android {
         enabled = true
     }
 
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
+
 }
 
 dependencies {
@@ -110,11 +117,12 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
-   /* implementation "com.google.dagger:dagger:$daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    def mockitoVersion = '2.11.0'
+    testImplementation "org.mockito:mockito-inline:$mockitoVersion"
+    testImplementation "android.arch.core:core-testing:1.1.1"
 
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
-    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"*/
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
 }
