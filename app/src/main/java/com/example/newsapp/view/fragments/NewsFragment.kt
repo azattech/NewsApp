@@ -3,6 +3,7 @@ package com.example.newsapp.view.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newsapp.R
 import com.example.newsapp.base.BaseFragment
@@ -13,13 +14,14 @@ import com.example.newsapp.viewmodel.NewsViewModel
 
 class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>() {
 
-    private val newsListAdapter =
-        NewsListAdapter(arrayListOf())
+    private val newsListAdapter by lazy {
+        NewsListAdapter()
+    }
 
     private val newsListDataObserver = Observer<List<Articles>> { list ->
         list?.let {
             binding.recyclerNewsList.visibility = View.VISIBLE
-            newsListAdapter.updateNews(it)
+            newsListAdapter.addItems(it)
         }
     }
 
@@ -66,6 +68,13 @@ class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>() {
                 viewModel.refresh()
                 refreshLayout.isRefreshing = false
             }
+        }
+
+        newsListAdapter.listener = { view, item, position ->
+            val action =
+                NewsFragmentDirections.actionNewsFragmentToDetailFragment(item)
+            Navigation.findNavController(view).navigate(action)
+
         }
     }
 }
