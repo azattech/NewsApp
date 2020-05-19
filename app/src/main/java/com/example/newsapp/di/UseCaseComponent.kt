@@ -1,8 +1,6 @@
 package com.example.newsapp.di
 
-
-import com.example.newsapp.network.NewsApiService
-import com.example.newsapp.network.NewsRepository
+import com.example.newsapp.network.NewsUseCase
 import dagger.Component
 
 
@@ -11,13 +9,10 @@ import dagger.Component
  *                       *
  * Contact: @theazat     *
  *                       *
- * 12/04/2020 -11:37 AM  *
+ * 19/05/2020 - 11:52 AM  *
  ************************/
-
 @Component(modules = [ApiModule::class])
-interface ApiComponent {
+interface UseCaseComponent {
 
-    fun inject(newsApiService: NewsApiService)
-
-    fun injectRepository(newsRepository: NewsRepository)
+    fun inject(newsUseCase: NewsUseCase)
 }

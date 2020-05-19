@@ -1,4 +1,4 @@
-package com.example.newsapp.model.network
+package com.example.newsapp.network
 
 
 import com.example.newsapp.model.News

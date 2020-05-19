@@ -1,4 +1,4 @@
-package com.example.newsapp.model.network
+package com.example.newsapp.network
 
 import com.example.newsapp.di.DaggerApiComponent
 import javax.inject.Inject
@@ -20,14 +20,5 @@ class NewsApiService {
       init {
          DaggerApiComponent.create().inject(this)
       }
-
-    /* fun provideNewsApi(): NewsApi {
-         return Retrofit.Builder()
-             .baseUrl(BASE_URL)
-             .addConverterFactory(MoshiConverterFactory.create())
-             .addCallAdapterFactory(CoroutineCallAdapterFactory())
-             .build()
-             .create(NewsApi::class.java)
-     }*/
 }
 

@@ -1,4 +1,4 @@
-package com.example.newsapp.extensions
+package com.example.newsapp.utils
 
 import android.content.Context
 import android.webkit.WebView
@@ -8,8 +8,6 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.newsapp.R
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 /*************************
@@ -19,11 +17,6 @@ import java.util.*
  *                       *
  * 04/03/2020 - 9:43 PM  *
  ************************/
-
-fun Date.formatToServerDateTimeDefaults(): String {
-    val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-    return sdf.format(this)
-}
 
 fun getProgressDrawable(context: Context): CircularProgressDrawable {
     return CircularProgressDrawable(context).apply {

@@ -37,11 +37,6 @@ class DetailFragment : Fragment() {
 
         dataBinding.articles = articles
         initWebView()
-
-        /*articles?.url?.let {
-            initWebView()
-            progressWebView.visibility = View.GONE
-        }*/
     }
 
     @SuppressLint("SetJavaScriptEnabled")

@@ -9,12 +9,10 @@ import kotlinx.android.parcel.Parcelize
  *                       *
  * Contact: @theazat     *
  *                       *
- * 02/03/2020 - 10:47 PM *
+ * 19/05/2020 - 12:05 PM *
  ************************/
-
 @Parcelize
-data class News(
-    val status: String?,
-    val totalResults: Int?,
-    val articles: List<Articles>?
+data class Source(
+    val id: String?,
+    val name: String?
 ) : Parcelable

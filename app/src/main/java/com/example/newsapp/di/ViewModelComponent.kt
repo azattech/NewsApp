@@ -1,6 +1,6 @@
 package com.example.newsapp.di
 
-import com.example.newsapp.viewmodel.NewsViewModel
+import com.example.newsapp.network.NewsUseCase
 import dagger.Component
 
 
@@ -15,5 +15,5 @@ import dagger.Component
 @Component(modules = [ApiModule::class])
 interface ViewModelComponent {
 
-    fun inject(viewModel: NewsViewModel)
+    fun inject(newsUseCase: NewsUseCase)
 }

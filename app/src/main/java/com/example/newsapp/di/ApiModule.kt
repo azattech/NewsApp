@@ -1,7 +1,8 @@
 package com.example.newsapp.di
 
-import com.example.newsapp.model.network.NewsApi
-import com.example.newsapp.model.network.NewsApiService
+import com.example.newsapp.network.NewsApi
+import com.example.newsapp.network.NewsApiService
+import com.example.newsapp.utils.Constants.Companion.BASE_URL
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -18,10 +19,6 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 @Module
 class ApiModule {
-
-    companion object {
-        private val BASE_URL = "https://newsapi.org/v2/"
-    }
 
     @Provides
     fun provideNewsApi(): NewsApi {

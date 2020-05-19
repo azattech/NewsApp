@@ -1,4 +1,4 @@
-package com.example.newsapp.model.network
+package com.example.newsapp.network
 
 import com.example.newsapp.model.Articles
 
@@ -12,9 +12,9 @@ import com.example.newsapp.model.Articles
  ************************/
 class NewsRepository(private val newsApi: NewsApi) {
 
-    suspend fun getLatestNews(): MutableList<Articles>? {
+    suspend fun getLatestNews(country: String?, apiKey: String?): MutableList<Articles>? {
         return try {
-            val response = newsApi.getNewsAsync("us", "8fc34d247dee40b5ba90295e691cf8b7")
+            val response = newsApi.getNewsAsync(country, apiKey)
                 .await()
             response.articles?.toMutableList()
         } catch (e: Exception) {
